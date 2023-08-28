@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: add
-        image: mikewhalen/summation-service:v1.2
+        image: mikewhalen/summation-service:v1.3
         ports:
         - name: add-service
           containerPort: 3000
