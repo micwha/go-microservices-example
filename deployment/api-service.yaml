@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: mikewhalen/api-service:v1.1
+          image: mikewhalen/api-service:v1.2
           ports:
             - name: api-service
               containerPort: 8080

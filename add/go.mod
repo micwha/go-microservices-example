@@ -1,4 +1,4 @@
-module github.com/mikewhalen/kubernetes-go-grpc
+module github.com/micwha/go-microservices-example
 
 go 1.19
 
