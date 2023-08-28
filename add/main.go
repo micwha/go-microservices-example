@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/mikewhalen/kubernetes-go-grpc/pd/add"
+	"github.com/micwha/kubernetes-go-grpc/pd/add"
 )
 
 func (s *server) Compute(cxt context.Context, r *add.AddRequest) (*add.AddResponse, error) {
