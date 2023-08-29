@@ -8,7 +8,7 @@ import (
 	"log"
 	"net"
 
-	"github.com/micwha/go-microservices-example/add"
+	add "github.com/micwha/go-microservices-example/pb"
 )
 
 func (s *server) Compute(cxt context.Context, r *add.AddRequest) (*add.AddResponse, error) {
