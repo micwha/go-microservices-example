@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	add "github.com/micwha/go-microservices-example"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"net/http"
@@ -18,7 +17,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	addClient := pb.NewAddServiceClient(conn)
+	addClient := NewAddServiceClient(conn)
 
 	routes := mux.NewRouter()
 	routes.HandleFunc("/", indexHandler).Methods("GET")
@@ -38,7 +37,7 @@ func main() {
 		ctx, cancel := context.WithTimeout(context.TODO(), time.Minute)
 		defer cancel()
 
-		req := &pb.AddRequest{A: a, B: b}
+		req := &AddRequest{A: a, B: b}
 		if resp, err := addClient.Compute(ctx, req); err == nil {
 			msg := fmt.Sprintf("Summation is %d", resp.Result)
 			json.NewEncoder(w).Encode(msg)

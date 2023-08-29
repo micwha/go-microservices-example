@@ -7,12 +7,10 @@ import (
 	"google.golang.org/grpc/reflection"
 	"log"
 	"net"
-
-	add "github.com/micwha/go-microservices-example"
 )
 
-func (s *server) Compute(cxt context.Context, r *add.AddRequest) (*add.AddResponse, error) {
-	result := &add.AddResponse{}
+func (s *server) Compute(cxt context.Context, r *AddRequest) (*AddResponse, error) {
+	result := &AddResponse{}
 	result.Result = r.A + r.B
 
 	logMessage := fmt.Sprintf("A: %d   B: %d     sum: %d", r.A, r.B, result.Result)
@@ -30,7 +28,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	add.RegisterAddServiceServer(s, &server{})
+	RegisterAddServiceServer(s, &server{})
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("Failed to serve: %v", err)
