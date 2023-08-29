@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:latest AS builder
 
 RUN apt-get update && apt-get install -y ca-certificates openssl
 
@@ -20,5 +20,21 @@ RUN go mod download && \
     go mod verify
 # copy the source code as the last step
 COPY . .
-ENTRYPOINT go run main.go
+
+# build binary
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/api ./
+
+
+# build a small image
+FROM alpine:3.17.3
+LABEL language="golang"
+# import the user and group files from the builder
+COPY --from=builder /etc/passwd /etc/passwd
+# copy the static executable
+COPY --from=builder --chown=elf:1000 /go/bin/api /api
+# use a non-root user
+USER elf
+# run app
+ENTRYPOINT ["./api"]
+# ENTRYPOINT go run main.go
 EXPOSE 8080
