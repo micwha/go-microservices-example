@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
-	"github.com/micwha/go-microservices-example/add"
+	add "github.com/micwha/go-microservices-example"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"net/http"
